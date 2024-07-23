@@ -33,7 +33,7 @@ import { MongoDBAdapter } from "@auth/mongodb-adapter"
 import client from "./lib/db"
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: MongoDBAdapter(client),
+  adapter: MongoDBAdapter(client.connect()),
   providers: [],
 })
 ```
@@ -49,7 +49,7 @@ import client from "./lib/db"
 export const { onRequest, useSession, useSignIn, useSignOut } = QwikAuth$(
   () => ({
     providers: [],
-    adapter: MongoDBAdapter(client),
+    adapter: MongoDBAdapter(client.connect()),
   })
 )
 ```
@@ -63,7 +63,7 @@ import { MongoDBAdapter } from "@auth/mongodb-adapter"
 import client from "./lib/db"
 
 export const { handle, signIn, signOut } = SvelteKitAuth({
-  adapter: MongoDBAdapter(client),
+  adapter: MongoDBAdapter(client.connect()),
 })
 ```
 
@@ -82,7 +82,7 @@ app.use(
   "/auth/*",
   ExpressAuth({
     providers: [],
-    adapter: MongoDBAdapter(client),
+    adapter: MongoDBAdapter(client.connect()),
   })
 )
 ```
